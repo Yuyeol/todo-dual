@@ -15,7 +15,7 @@ const Title = styled.span`
   font-size: 23px;
   font-weight: 600;
   box-shadow: inset -6px -6px 15px rgba(145, 160, 180, 0.15),
-    10px 10px 10px rgba(118, 146, 180, 0.5);
+    5px 5px 5px rgba(118, 146, 180, 0.5);
 `;
 
 const TodoItem = ({ id, title, select, handleSelect }) => (

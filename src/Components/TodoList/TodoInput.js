@@ -5,9 +5,11 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(218, 207, 161, 0.6);
-  padding: 20px 10px;
-  border-radius: 10px;
+  background-color: rgb(255, 255, 255, 0.6);
+  padding: 30px 20px;
+  border-radius: 30px;
+  box-shadow: inset -6px -6px 15px rgba(145, 160, 180, 0.1),
+    30px 30px 40px rgba(118, 146, 180, 0.1);
 `;
 const InputTitle = styled.input`
   width: 400px;
@@ -30,15 +32,26 @@ const InputContents = styled.textarea`
     outline: none;
   }
 `;
-const BtnBox = styled.div``;
+const BtnBox = styled.div`
+  display: flex;
+`;
 const Add = styled.input`
-  display: ${(props) => (props.active ? "inline" : "none")};
+  display: ${(props) => (props.active ? "flex" : "none")};
+  &:focus {
+    outline: none;
+  }
 `;
 const Edit = styled.input`
-  display: ${(props) => (props.active ? "inline" : "none")};
+  display: ${(props) => (props.active ? "flex" : "none")};
+  &:focus {
+    outline: none;
+  }
 `;
 const Delete = styled.input`
-  display: ${(props) => (props.active ? "inline" : "none")};
+  display: ${(props) => (props.active ? "flex" : "none")};
+  &:focus {
+    outline: none;
+  }
 `;
 
 const TodoInput = ({ handleEdit, handleAdd, handleDelete, btnChange }) => {

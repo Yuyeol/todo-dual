@@ -6,12 +6,14 @@ import TodoList from "./TodoList/TodoList";
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-around;
-  background-color: rgb(218, 207, 161, 0.3);
-  width: 800px;
+  background-image: url("https://images.unsplash.com/photo-1542435503-956c469947f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 810px;
   height: 600px;
   padding: 30px;
   border-radius: 30px;
+  box-shadow: 30px 30px 40px rgba(118, 146, 180, 0.4);
 `;
 
 class App extends Component {
@@ -114,6 +116,7 @@ class App extends Component {
     const { todos } = this.state;
     this.setState({ todos: todos.filter((todo) => todo.id !== id) });
     this.setText("", "");
+    this.setState({ btnChange: false });
   };
 
   //리스트아이템 클릭

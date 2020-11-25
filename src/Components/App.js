@@ -24,29 +24,30 @@ class App extends Component {
       {
         id: 0,
         title: "리액트 소개",
-        contents: "contents",
+        contents: "리액트를 소개하자",
         select: false,
-        Priority: 1,
+        complete: false,
       },
       {
         id: 1,
         title: "리액트 만남",
-        contents: "contents",
+        contents: "리액트를 만나보자",
         select: false,
-        Priority: 2,
+        complete: false,
       },
       {
         id: 2,
         title: "리액트 이별",
-        contents: "contents",
+        contents: "리액트와 이별하자",
         select: false,
-        Priority: 3,
+        complete: false,
       },
     ],
     // selectedTodo: null,
     // 추가, 수정버튼 토글 용도
     // select: false,
     btnChange: false,
+    fontChange: false,
   };
 
   //title, contents의 text를 변경함
@@ -74,7 +75,7 @@ class App extends Component {
         title: title,
         contents: contents,
         select: false,
-        grade: 0,
+        complete: false,
       }),
     });
   };
@@ -87,6 +88,11 @@ class App extends Component {
     if (title !== "") {
       this.createTodo(title, contents);
       this.setText("", "");
+    } else {
+      this.setState({ fontChange: true });
+      setTimeout(() => {
+        this.setState({ fontChange: false });
+      }, 1500);
     }
   };
 
@@ -95,14 +101,37 @@ class App extends Component {
     e.preventDefault();
     const title = document.querySelector(".js-input").value,
       contents = document.querySelector(".js-textarea").value;
+    if (title !== "") {
+      const id = Number(e.nativeEvent.path[2][4].id);
+      const { todos } = this.state;
+      const copyTodos = [...todos];
+      const selected = todos[id];
+      copyTodos[id] = {
+        ...selected,
+        title,
+        contents,
+      };
+      this.setState({
+        todos: copyTodos,
+      });
+    } else {
+      this.setState({ fontChange: true });
+      setTimeout(() => {
+        this.setState({ fontChange: false });
+      }, 1500);
+    }
+  };
+
+  //완료버튼 클릭
+  handleComplete = (e) => {
+    e.preventDefault(e);
     const id = Number(e.nativeEvent.path[2][4].id);
     const { todos } = this.state;
     const copyTodos = [...todos];
-    const selected = todos[id];
+    const selectedTodo = todos[id];
     copyTodos[id] = {
-      ...selected,
-      title,
-      contents,
+      ...selectedTodo,
+      complete: !selectedTodo.complete,
     };
     this.setState({
       todos: copyTodos,
@@ -147,7 +176,14 @@ class App extends Component {
 
   render() {
     // console.log(this.state);
-    const { handleEdit, handleSelect, handleAdd, openAdd, handleDelete } = this;
+    const {
+      handleEdit,
+      handleSelect,
+      handleAdd,
+      openAdd,
+      handleComplete,
+      handleDelete,
+    } = this;
     return (
       <>
         <Container>
@@ -161,6 +197,7 @@ class App extends Component {
             handleEdit={handleEdit}
             handleAdd={handleAdd}
             handleDelete={handleDelete}
+            handleComplete={handleComplete}
           />
         </Container>
         <GlobalStyles />
